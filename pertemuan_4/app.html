@@ -1,0 +1,64 @@
+<body>
+    <div id="root">
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- script babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- kodingan js -->
+    <script type="text/babel">
+        
+        function Header(){
+            return(
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                </ul>
+            </nav>
+            );
+        }
+
+
+        function Main(){
+            return (
+            <main>
+                <Hello />
+                <Hello />
+                <Hello />
+            </main>
+            );
+        }
+
+        function Footer(){
+            return(
+                <footer>
+                    <h2>copyright by zahid</h2>
+                    <p>created by react.js</p>
+                </footer>
+            );
+        }
+
+        function App(){
+            return(
+                <div>
+                    <Header/>
+                    <Main/>
+                    <Footer/>
+                </div>
+            );
+        }
+
+         // ambil root element
+         const rootElement = document.getElementById("root");
+
+        // buat root react
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App/>)
+</script>
+</div>
+</body>
+
+
