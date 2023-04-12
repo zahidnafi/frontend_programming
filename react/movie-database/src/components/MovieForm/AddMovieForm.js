@@ -45,11 +45,13 @@ function handleSubmit(event){
     setIsDateError(true);
     return
   }
-  else if (date === ""){
+  else if (image === ""){
     setIsImageError(true);
+    return
   }
-  else if (date === ""){
+  else if (genre === ""){
     setIsGenreError(true);
+    return
   }
 
   const newMovie = {
