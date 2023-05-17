@@ -7,71 +7,73 @@ import Error from '../Error/Error';
 
 
 function AddMovieForm(props) {
-  const {movies, setMovies} = props;
+  const { movies, setMovies } = props;
 
-const [title, setTitle] = useState("");
-const [isTitleError, setIsTitleError] = useState(false);
-const [date, setDate] = useState("");
-const [isDateError, setIsDateError] = useState(false);
-const [image, setImage] = useState("");
-const [isImageError, setIsImageError] = useState(false);
-const [genre, setGenre] = useState("");
-const [isGenreError, setIsGenreError] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    date: "",
+    poster: "",
+    type: "",
+  });
 
-
-function handleInputChange(event){
-  setTitle(event.target.value);
-}
-
-function handleInputDate(event){
-  setDate(event.target.value);
-}
-
-function handleInputImage(event){
-  setImage(event.target.value);
-}
-
-function handleInputGenre(event){
-  setGenre(event.target.value);
-}
-
-function handleSubmit(event){
-  event.preventDefault();
-  if (title === ""){
-    setIsTitleError(true);
-    return
-  }
-  else if (date === ""){
-    setIsDateError(true);
-    return
-  }
-  else if (image === ""){
-    setIsImageError(true);
-    return
-  }
-  else if (genre === ""){
-    setIsGenreError(true);
-    return
+  /**
+   * TODO
+   * - PROBLEM: 1 ERROR 1 STATE.
+   * - TODO: REFACTOR SEMUA ERROR JADI 1 STATE.
+   */
+  const [errors, setErrors] = useState({
+    isTitleError: false,
+    isDateError: false,
+    isPosterError: false,
+  });
+  
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   }
 
-  const newMovie = {
-  id: nanoid(),
-  title: title,
-  year: date,
-  type: genre,
-  poster: image,
-  };
+  function validate() {
+    const { title, date, poster } = formData;
+  
+    if (title === "") {
+      setErrors({ ...errors, isTitleError: true });
+      return false;
+    } else if (date === "") {
+      setErrors({ ...errors, isTitleError: false, isDateError: true });
+      return false;
+    } else if (poster === "") {
+      setErrors({ ...errors, isDateError: false, isPosterError: true });
+      return false;
+    } else {
+      setErrors({ ...errors, isTitleError: false, isDateError: false, isPosterError: false });
+      return true;
+    }
+  }
 
-  setMovies([...movies, newMovie]);
+  function addMovie() {
+    const movie = {
+      id: nanoid(),
+      title: formData.title,
+      year: formData.date,
+      type: formData.type,
+      poster: formData.poster,
+    };
+  
+    setMovies([...movies, movie]);
+  }
+  
 
-  setIsTitleError(false);
-  setIsDateError(false);
-  setIsImageError(false);
-  setIsGenreError(false);
+  function handleSubmit(e) {
+    e.preventDefault();
 
-}
+    validate() && addMovie();
+  }
 
-console.log(title)
+  const { title, date, poster, type } = formData;
+
   return (
     <div className={styles.container}>
       <section className={styles.form}>
@@ -84,39 +86,39 @@ console.log(title)
         </div>
       <div className={styles.form__right}>
       <h2 className={styles.form__title}>Add Movie  </h2>
-      <form onSubmit={handleSubmit}>
-      <label for="Title">Title</label>
+      <form onSubmit={handleSubmit} >
+      <label for="title">Title</label>
       <br />
-      <input className={styles.form__input} id="title" type="text"  value={title} onChange={handleInputChange}/>
-      {isTitleError ? <Error>wajib diisi</Error> : ""}
+      <input className={styles.form__input} id="title" type="text"  value={title} name="title" onChange={handleChange}/>
+      {errors.isTitleError ? <Error>wajib diisi</Error> : ""}
       <br/>
-      <label for="Date">Date</label>
+      <label for="date">Date</label>
       <br />
-      <input className={styles.form__input} id="date" type="text"  value={date} onChange={handleInputDate}/>
-      {isDateError ? <Error>wajib diisi</Error>  : ""}
+      <input className={styles.form__input} id="date" type="number"  value={date} name="date" onChange={handleChange}/>
+      {errors.isDateError ? <Error>wajib diisi</Error>  : ""}
       <br/>
-      <label for="Image">Image</label>
+      <label for="poster">Image</label>
       <br />
-      <input className={styles.form__input} id="Image" type="text" value={image} onChange={handleInputImage}  />
-      {isImageError ? <Error>wajib diisi</Error> : ""}
+      <input className={styles.form__input} id="poster" type="text" value={poster} name="poster" onChange={handleChange}  />
+      {errors.isPosterError ? <Error>wajib diisi</Error> : ""}
       <br/>
-      <label for="Genre">Genre:</label>
+      <label for="type">Genre</label>
       <br/>
-      <select className={styles.form__input} value={genre} onChange={handleInputGenre}>
+      <select className={styles.form__input} value={type} name="type" onChange={handleChange}>
         <option value="Action">Action</option>
         <option value="Drama">Drama</option>
         <option value="Horror">Horror</option>
         <option value="Comedy">Comedy</option>
-      </select> 
-      {isGenreError ? <Error>wajib diisi</Error> : ""}
+      </select>
       <br/>
-      <button className={styles.form__button}>Submit</button>
+      <button className={styles.form__button} >Submit</button>
       </form>
       </div>
       </section>
     </div>
   );
 }
+
 
 
 export default AddMovieForm;

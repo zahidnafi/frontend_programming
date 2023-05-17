@@ -1,9 +1,7 @@
 // Import Navbar, Hero, Movies, Footer Component
-import Navbar from "../components/Navbar/Navbar";
 import Hero from "../components/Hero/Hero";
 import Movies from "../components/Movies/Movies";
 import AddMovieForm from "../components/MovieForm/AddMovieForm";
-import Footer from "../components/Footer/Footer";
 import {useState} from'react';
 import data from "../utils/constants/data";
 /**
@@ -29,9 +27,9 @@ function Main() {
 function Home() {
   return (
     <>
-      <Navbar />
+     
       <Main />
-      <Footer />
+ 
     </>
   );
 }
