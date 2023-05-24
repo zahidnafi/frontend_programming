@@ -1,6 +1,23 @@
+import { useState, useEffect } from "react";
 import styles from "./Hero.module.css";
 
 function Hero() {
+  const [movie, setMovie] = useState("");
+
+  useEffect(function () {
+    // lakukan fetch disini
+
+    async function fetchMovie() {
+      const url = "https://www.omdbapi.com/?apikey=fcf50ae6&i=tt2975590"
+      const response = await fetch(url);
+      const data = await response.json();
+      setMovie(data);
+    }
+
+    fetchMovie();
+  }, []);
+
+
   return (
     <div className={styles.container}>
       <section className={styles.hero}>
