@@ -3,6 +3,7 @@ import styles from './AddMovieForm.module.css';
 import {nanoid} from 'nanoid';
 import {useState} from 'react';
 import Error from '../Error/Error';
+import Button from '../ui/Button/button';
 
 
 
@@ -111,7 +112,7 @@ function AddMovieForm(props) {
         <option value="Comedy">Comedy</option>
       </select>
       <br/>
-      <button className={styles.form__button} >Submit</button>
+      <Button full={true}>Add Movie</Button>
       </form>
       </div>
       </section>
