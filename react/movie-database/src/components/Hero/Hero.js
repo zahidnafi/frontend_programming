@@ -8,6 +8,7 @@ function Hero() {
   const [movie, setMovie] = useState("");
   const API_KEY = process.env.REACT_APP_API_KEY;
   const genres = movie && movie.genres.map((genre) => genre.name).join(" ");
+  const trailer = movie && `https://www.youtube.com/watch?v=${movie.videos.results[0].key}`
   
   
   
@@ -43,7 +44,7 @@ function Hero() {
           <h2>{movie.title}</h2>
           <h3>{genres}</h3>
           <p>{movie.overview}</p>
-          <Button md>Watch</Button>
+          <Button as="a" href= {trailer} target="_blank" >Watch Trailer</Button>
         </div>
         <div className="hero__right">
           <img
