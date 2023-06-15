@@ -3,11 +3,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Movies from "../../components/Movies/Movies";
 import Hero from "../../components/Hero/Hero"
+import ENDPOINTS from "../../utils/constants/endpoints";
 
 function NowPlayingMovies(){
-    const API_KEY = process.env.REACT_APP_API_KEY;
-    const URL = `https://api.themoviedb.org/3/movie/now_playing/?api_key=${API_KEY}`;
-
+  
     //membuat state
     const [movies, setMovies] = useState([]);
     
@@ -18,7 +17,7 @@ function NowPlayingMovies(){
 
     async function getNowPlayingMovies(){
          // fetch data dari axios
-         const response = await axios(URL);
+         const response = await axios(ENDPOINTS.NOW_PLAYING);
  
          setMovies(response.data.results)
 
@@ -29,7 +28,7 @@ function NowPlayingMovies(){
     return(
         <>
             <Hero />
-            <Movies movies={movies}/>
+            <Movies title="Now Playing" movies={movies}/>
            
         </>
     );

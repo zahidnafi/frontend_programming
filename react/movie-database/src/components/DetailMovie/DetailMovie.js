@@ -66,9 +66,8 @@ function DetailMovie(){
     useEffect(() =>{
         fetchDetailMovie();
 
-    },[] );
+    },[id] );
 
-    console.log(movie);
 
     return (
         <StyledDetailMovie>
