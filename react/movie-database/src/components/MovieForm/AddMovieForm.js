@@ -4,10 +4,14 @@ import {nanoid} from 'nanoid';
 import {useState} from 'react';
 import Error from '../Error/Error';
 import Button from '../ui/Button/button';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function AddMovieForm(props) {
+
+  const navigation = useNavigate();
+
   const { movies, setMovies } = props;
 
   const [formData, setFormData] = useState({
@@ -71,6 +75,8 @@ function AddMovieForm(props) {
     e.preventDefault();
 
     validate() && addMovie();
+
+    navigation("/")
   }
 
   const { title, date, poster, type } = formData;
