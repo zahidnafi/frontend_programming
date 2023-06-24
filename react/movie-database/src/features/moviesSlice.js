@@ -7,14 +7,23 @@ const moviesSlice = createSlice({
         movies: data,
     }, 
     reducers:{
-        addMovie(state, action) {},
+        addMovie(state, action) {
+            state.movies.push(action.payload);
+        },
+
+        updateMovie(state,action){
+            state.movies = action.payload;
+        }
     },
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
     
 });
 
-const {addMovie} = moviesSlice.actions;
+const {addMovie, updateMovie} = moviesSlice.actions;
 const moviesReducer = moviesSlice.reducer;
 
-export{addMovie};
+export{addMovie, updateMovie};
 export default moviesReducer;
