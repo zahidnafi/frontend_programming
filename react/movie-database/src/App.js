@@ -2,7 +2,7 @@
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom"
 import CreateMovie from "./pages/movie/Create";
-import Popular from "./pages/movie/Popular";
+import Popular from "./pages/movie/popular";
 import NowPlayingMovie from "./pages/movie/NowPlayingMovie";
 import TopRatedMovie from "./pages/movie/TopRatedMovie";
 import Layout from "./Layouts";
